@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Short N’ Sweet Bakery | Repostería & Pastelería Artesanal</title>
+  <meta name="description" content="Short N’ Sweet Bakery - Catálogo en línea de deliciosos Cheesecakes, Rolls, Cookies artesanales y Flan tradicional. Realiza tu pedido con retiro en tienda (Pick up).">
+  
+  <!-- Favicon e Identidad de Marca -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧁</text></svg>">
+  
+  <!-- Hoja de Estilos -->
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       ENCABEZADO PERSISTENTE (Módulo 1: RF-1.1 a RF-1.6)
+       ========================================================================== -->
+  <header class="site-header" id="mainHeader">
+    <div class="container header-container">
+      
+      <!-- Logotipo Oficial y Nombre (RF-1.2) -->
+      <a href="#inicio" class="header-logo" aria-label="Inicio - Short N' Sweet Bakery">
+        <div class="logo-icon">🧁</div>
+        <div class="logo-text-box">
+          <span class="logo-title">Short N’ Sweet</span>
+          <span class="logo-tagline">Bakery • Santo Domingo</span>
+        </div>
+      </a>
+
+      <!-- Barra de Búsqueda Interactiva en Header (RF-1.4) -->
+      <div class="header-search-wrapper" role="search">
+        <svg class="header-search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input 
+          type="search" 
+          id="headerSearchInput" 
+          class="header-search-input" 
+          placeholder="Buscar cheesecakes, cookies, rolls..." 
+          aria-label="Buscar postres en tiempo real"
+        >
+      </div>
+
+      <!-- Menú Navegable con Atajos de Categoría (RF-1.3) -->
+      <nav class="header-nav" id="mainDesktopNav" aria-label="Navegación principal">
+        <a href="#catalogo" class="nav-link nav-cat-btn" data-category="cheesecakes">Cheesecakes</a>
+        <a href="#catalogo" class="nav-link nav-cat-btn" data-category="rolls">Rolls</a>
+        <a href="#catalogo" class="nav-link nav-cat-btn" data-category="cookies">Cookies</a>
+        <a href="#catalogo" class="nav-link nav-cat-btn" data-category="flan">Flan</a>
+        <a href="#nosotros" class="nav-link">Nosotros</a>
+        <a href="#ubicacion" class="nav-link">Ubicación</a>
+      </nav>
+
+      <!-- Acciones de Cabecera: Cuenta y Carrito Dinámico (RF-1.5, RF-1.6) -->
+      <div class="header-actions">
+        <!-- Acceso a Cuenta de Usuario (RF-1.6) -->
+        <button type="button" class="btn-header-action btn-account" id="accountBtn" aria-label="Mi Cuenta e Historial de Pedidos">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <span class="btn-label-desktop">Mis Pedidos</span>
+        </button>
+
+        <!-- Botón del Carrito con Contador Dinámico (RF-1.5) -->
+        <button type="button" class="btn-header-action btn-cart" data-action="open-cart" aria-label="Ver carrito de compras">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="9" cy="21" r="1"></circle>
+            <circle cx="20" cy="21" r="1"></circle>
+            <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+          </svg>
+          <span class="btn-label-desktop">Carrito</span>
+          <span class="cart-count-badge" id="headerCartBadge">0</span>
+        </button>
+
+        <!-- Botón Hamburguesa Móvil -->
+        <button type="button" class="hamburger-btn" id="mobileMenuToggle" aria-label="Abrir menú de navegación">
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+          <span class="hamburger-line"></span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Menú Móvil Desplegable -->
+  <div class="mobile-nav-menu" id="mainNavMenu">
+    <div class="mobile-search-box">
+      <input type="search" id="catalogSearchInput" class="catalog-search-input" placeholder="Buscar en el catálogo...">
+    </div>
+    <a href="#catalogo" class="nav-cat-btn" data-category="all">🍰 Ver Todo el Menú</a>
+    <a href="#catalogo" class="nav-cat-btn" data-category="cheesecakes">🍓 Cheesecakes</a>
+    <a href="#catalogo" class="nav-cat-btn" data-category="rolls">🌀 Rolls de Canela</a>
+    <a href="#catalogo" class="nav-cat-btn" data-category="cookies">🍪 Cookies Artesanales</a>
+    <a href="#catalogo" class="nav-cat-btn" data-category="flan">🍮 Flan Casero</a>
+    <a href="#nosotros">📖 Sobre Nosotros</a>
+    <a href="#ubicacion">📍 Ubicación & Pick up</a>
+    <a href="#faq">❓ Preguntas Frecuentes</a>
+    <a href="#contacto">📞 Contacto Directo</a>
+  </div>
+
+  <main id="inicio">
+
+    <!-- ==========================================================================
+         HERO & PANCARTA PROMOCIONAL (Módulo 2: RF-2.1)
+         ========================================================================== -->
+    <section class="hero-section">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <div class="hero-pill-badge">
+            <span>✨ 100% Repostería Artesanal Fresca</span>
+          </div>
+          <h1 class="hero-title">
+            El toque dulce que <span class="highlight">alegra cada momento</span>
+          </h1>
+          <p class="hero-subtitle">
+            Horneamos a diario con mantequilla pura, canela de Ceilán y chocolate de alta gama. Descubre nuestros Cheesecakes sedosos, Rolls recién horneados, Cookies estilo NY y Flanes tradicionales.
+          </p>
+          <div class="hero-actions">
+            <a href="#catalogo" class="btn btn-primary">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+              Ordenar en Línea
+            </a>
+            <a href="#ubicacion" class="btn btn-secondary">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+              Ver Horarios de Retiro
+            </a>
+          </div>
+          <div class="hero-features-row">
+            <div class="hero-feature-item">
+              <span>⚡</span> <span>Retiro Pick up en < 2 mins</span>
+            </div>
+            <div class="hero-feature-item">
+              <span>💳</span> <span>Pago Seguro con Tarjeta</span>
+            </div>
+            <div class="hero-feature-item">
+              <span>🧁</span> <span>Ingredientes de Alta Calidad</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-image-wrapper">
+          <div class="hero-main-card">
+            <img 
+              src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=900&q=80" 
+              alt="Mesa con deliciosos postres y pasteles de Short N' Sweet Bakery"
+              loading="eager"
+            >
+            <div class="floating-hero-badge">
+              <span class="floating-badge-icon">🍓</span>
+              <div>
+                <div class="floating-badge-title">Especial de Temporada</div>
+                <div class="floating-badge-subtitle">Cheesecake de Fresas Silvestres</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         CATÁLOGO INTERACTIVO Y PRODUCTOS (Módulo 2: RF-2.1 a RF-2.4)
+         ========================================================================== -->
+    <section class="catalog-section" id="catalogo">
+      <div class="container">
+        
+        <div class="section-head-box">
+          <span class="section-pretitle">Nuestro Menú Artesanal</span>
+          <h2 class="section-title">Explora Nuestras 4 Especialidades</h2>
+          <p class="section-desc">Selecciona tus postres favoritos, verifica disponibilidad en tiempo real y agrégalos a tu carrito de compras.</p>
+        </div>
+
+        <!-- Barra de Control: Píldoras de Categoría y Buscador Central -->
+        <div class="catalog-controls">
+          <div class="category-nav-bar" role="tablist">
+            <button type="button" class="cat-pill active" data-category="all">
+              <span>✨</span> Todos los Postres
+            </button>
+            <button type="button" class="cat-pill" data-category="cheesecakes">
+              <span>🧀</span> Cheesecakes
+            </button>
+            <button type="button" class="cat-pill" data-category="rolls">
+              <span>🌀</span> Rolls & Cinnamon
+            </button>
+            <button type="button" class="cat-pill" data-category="cookies">
+              <span>🍪</span> Cookies Artesanales
+            </button>
+            <button type="button" class="cat-pill" data-category="flan">
+              <span>🍮</span> Flan Casero
+            </button>
+          </div>
+
+          <div class="catalog-meta-info">
+            <span id="productsCount">Cargando delicias...</span>
+            <button type="button" class="btn-clear-search" id="clearSearchBtn" style="font-size: 0.85rem; color: var(--primary); text-decoration: underline;">
+              Limpiar búsqueda
+            </button>
+          </div>
+        </div>
+
+        <!-- Grilla de Tarjetas de Productos (RF-2.2 y RF-2.3) -->
+        <div class="products-grid" id="productsGrid" aria-live="polite">
+          <!-- Renderizado dinámico vía js/app.js -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECCIÓN SOBRE NOSOTROS (Módulo 6: RF-6.1)
+         ========================================================================== -->
+    <section class="about-section" id="nosotros">
+      <div class="container about-grid">
+        <div class="about-image-collage">
+          <img 
+            src="https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=900&q=80" 
+            alt="Reposteros artesanos de Short N' Sweet preparando masas y canela fresca" 
+            class="about-main-img" 
+            loading="lazy"
+          >
+        </div>
+        <div class="about-text-content">
+          <span class="section-pretitle">Nuestra Pasión</span>
+          <h2 class="section-title">La Historia de Short N’ Sweet</h2>
+          <p class="section-desc" style="margin-bottom: 16px;">
+            Short N’ Sweet Bakery nació del sueño de transformar ingredientes nobles en momentos inolvidables. Creemos que la buena repostería no toma atajos: utilizamos huevos de granja frescos, cacao puro seleccionado, fermentaciones lentas para nuestros roles de canela y recetas artesanales perfeccionadas por generaciones.
+          </p>
+          <p class="section-desc">
+            Diseñamos esta plataforma web moderna para que puedas ordenar de forma ágil, transparente y retirar tu cajita de felicidad recién empacada en nuestro local sin filas ni esperas.
+          </p>
+
+          <div class="about-values-cards">
+            <div class="value-card">
+              <div class="value-icon">🌾</div>
+              <div class="value-title">100% Artesanal</div>
+              <div class="value-desc">Sin premezclas industriales ni conservantes artificiales.</div>
+            </div>
+            <div class="value-card">
+              <div class="value-icon">⏱️</div>
+              <div class="value-title">Horneado Diario</div>
+              <div class="value-desc">Lotes pequeños para garantizar máxima frescura y aroma.</div>
+            </div>
+            <div class="value-card">
+              <div class="value-icon">❤️</div>
+              <div class="value-title">Sabor Auténtico</div>
+              <div class="value-desc">Equilibrio perfecto de dulzura y textura memorable.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECCIÓN UBICACIÓN Y PICK UP (Módulo 5: RF-5.2 y RF-6.3)
+         ========================================================================== -->
+    <section class="location-section" id="ubicacion">
+      <div class="container">
+        
+        <div class="section-head-box">
+          <span class="section-pretitle">Modalidad Pick Up (Retiro en Tienda)</span>
+          <h2 class="section-title">Ven a Retirar tus Postres</h2>
+          <p class="section-desc">Realiza tu pedido en línea y recógelo listo y empacado para regalo en nuestro punto oficial en Piantini.</p>
+        </div>
+
+        <div class="location-card-container">
+          <div class="location-map-wrapper">
+            <!-- Mapa interactivo de OpenStreetMap centrado en Piantini, Santo Domingo -->
+            <iframe 
+              src="https://www.openstreetmap.org/export/embed.html?bbox=-69.9400%2C18.4680%2C-69.9200%2C18.4820&amp;layer=mapnik&amp;marker=18.4740%2C-69.9300"
+              title="Ubicación oficial de Short N' Sweet Bakery en Piantini"
+              loading="lazy"
+            ></iframe>
+          </div>
+
+          <div class="location-content-box">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+              <span class="badge status-available">● Abierto para Retiros</span>
+            </div>
+            <h3 style="font-family: var(--font-heading); font-size: 1.4rem; color: var(--accent-chocolate); margin-bottom: 8px;">
+              Local Principal Piantini
+            </h3>
+            <p style="color: var(--text-dark); font-size: 0.95rem; margin-bottom: 14px;">
+              📍 <strong>Av. Abraham Lincoln #452</strong>, Sector Piantini, Santo Domingo, Distrito Nacional, República Dominicana.
+            </p>
+
+            <h4 style="font-size: 0.88rem; font-weight: 700; text-transform: uppercase; color: var(--accent-brown); letter-spacing: 0.5px;">
+              Horarios de Retiro Pick Up:
+            </h4>
+            <ul class="location-hours-list">
+              <li>
+                <span>Lunes a Viernes:</span>
+                <strong>8:30 AM - 8:30 PM</strong>
+              </li>
+              <li>
+                <span>Sábados:</span>
+                <strong>9:00 AM - 8:00 PM</strong>
+              </li>
+              <li>
+                <span>Domingos:</span>
+                <strong>10:00 AM - 6:00 PM</strong>
+              </li>
+            </ul>
+
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <a href="https://maps.google.com/?q=Piantini+Santo+Domingo" target="_blank" rel="noopener noreferrer" class="btn btn-secondary" style="padding: 8px 16px; font-size: 0.85rem;">
+                🗺️ Abrir en Google Maps
+              </a>
+              <button type="button" class="btn btn-primary" onclick="document.getElementById('catalogo').scrollIntoView({behavior: 'smooth'})" style="padding: 8px 16px; font-size: 0.85rem;">
+                🧁 Hacer Pedido para Retiro
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECCIÓN PREGUNTAS FRECUENTES (FAQ - RF-6.4)
+         ========================================================================== -->
+    <section class="faq-section" id="faq">
+      <div class="container faq-container-narrow">
+        
+        <div class="section-head-box">
+          <span class="section-pretitle">Centro de Respuestas</span>
+          <h2 class="section-title">Preguntas Frecuentes (FAQ)</h2>
+          <p class="section-desc">Resolvemos tus dudas habituales sobre pedidos, ingredientes, conservación y logística.</p>
+        </div>
+
+        <div class="faq-list">
+          
+          <div class="faq-item active">
+            <div class="faq-question">
+              <span>¿Cómo funciona el proceso de retiro en tienda (Pick up)?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+            <div class="faq-answer">
+              Al confirmar tu orden en nuestra web, tu pedido se envía directamente al área de cocina y empaque. Al finalizar el checkout obtendrás un código único de orden (ej. #SNS-123456). Solo debes presentarte en nuestro local en Piantini y dar tu nombre o código en mostrador; ¡en menos de 2 minutos tendrás tu paquete listo!
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>¿Cuánto tiempo de conservación tienen los postres?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+            <div class="faq-answer">
+              Nuestros Cheesecakes y Flanes deben conservarse refrigerados entre 2°C y 5°C, manteniendo su frescura óptima hasta por 5 días. Los Cinnamon Rolls y Cookies se pueden conservar a temperatura ambiente en lugar fresco durante 3 días, o calentar en microondas 12 segundos para disfrutarlos como recién salidos del horno.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>¿Hacen entregas a domicilio (Shipping / Delivery)?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+            <div class="faq-answer">
+              Para esta Fase 1, nuestro canal principal y garantizado es <strong>Pick up (Retiro en local)</strong>. Sin embargo, hemos habilitado en el checkout el selector de envío para capturar tu dirección y calcular el envío correspondiente en zonas seleccionadas del Distrito Nacional para la Fase 2.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>¿Qué métodos de pago son aceptados en la plataforma?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+            <div class="faq-answer">
+              Aceptamos pagos directos y protegidos con tarjetas de crédito y débito Visa, MasterCard y American Express a través de nuestro formulario validado con altos estándares de seguridad en cliente.
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <div class="faq-question">
+              <span>¿Tienen opciones para personas con alergias o celíacos?</span>
+              <svg class="faq-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </div>
+            <div class="faq-answer">
+              En cada ficha técnica de nuestros postres detallamos los ingredientes y advertencias (contiene lácteos, trigo o frutos secos). Si requieres un pedido especial sin nueces o bajo pedido especial, escríbenos al WhatsApp directo antes de ordenar.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECCIÓN RESEÑAS Y TESTIMONIOS (RF-6.5 y Anexo B)
+         ========================================================================== -->
+    <section class="reviews-section" id="resenas">
+      <div class="container">
+        
+        <div class="reviews-head-action">
+          <div>
+            <span class="section-pretitle">Opiniones Reales</span>
+            <h2 class="section-title">Lo que dicen nuestros clientes</h2>
+            <p class="section-desc">Clientes enamorados de nuestras recetas artesanales en Santo Domingo.</p>
+          </div>
+          <div>
+            <button type="button" class="btn btn-primary" id="btnOpenReviewModal">
+              ⭐ Dejar mi Opinión
+            </button>
+          </div>
+        </div>
+
+        <div class="reviews-grid" id="reviewsCardsGrid">
+          <!-- Renderizado dinámico vía js/app.js -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==========================================================================
+         SECCIÓN DE CONTACTO RÁPIDO (RF-6.2)
+         ========================================================================== -->
+    <section class="contact-section" id="contacto">
+      <div class="container">
+        <div class="section-head-box">
+          <span class="section-pretitle">Atención al Cliente</span>
+          <h2 class="section-title">¿Tienes una pregunta o pedido corporativo?</h2>
+          <p class="section-desc">Estamos listos para atenderte por cualquiera de nuestros canales oficiales.</p>
+        </div>
+
+        <div class="contact-cards-row">
+          <div class="contact-card">
+            <div class="contact-icon">📱</div>
+            <h4 style="font-weight: 700; color: var(--accent-chocolate); margin-bottom: 4px;">WhatsApp & Teléfono</h4>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 12px;">Atención rápida de lunes a domingo</p>
+            <a href="https://wa.me/18095550192?text=Hola%20Short%20N'%20Sweet%20Bakery!%20Deseo%20hacer%20una%20consulta" target="_blank" rel="noopener noreferrer" style="color: var(--primary); font-weight: 700;">
+              (809) 555-0192
+            </a>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-icon">📧</div>
+            <h4 style="font-weight: 700; color: var(--accent-chocolate); margin-bottom: 4px;">Correo Electrónico</h4>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 12px;">Cotizaciones para eventos y bodas</p>
+            <a href="mailto:pedidos@shortnsweetbakery.com" style="color: var(--primary); font-weight: 700;">
+              pedidos@shortnsweetbakery.com
+            </a>
+          </div>
+
+          <div class="contact-card">
+            <div class="contact-icon">📸</div>
+            <h4 style="font-weight: 700; color: var(--accent-chocolate); margin-bottom: 4px;">Redes Sociales</h4>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 12px;">Etiquétanos en tus antojos</p>
+            <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" style="color: var(--primary); font-weight: 700;">
+              @shortnsweet.bakery
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       PANEL LATERAL DEL CARRITO DE COMPRAS (Módulo 3: RF-3.1 a RF-3.5)
+       ========================================================================== -->
+  <div class="cart-backdrop" id="cartBackdrop"></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-label="Carrito de compras" role="dialog" aria-modal="true">
+    
+    <div class="cart-drawer-header">
+      <h3 class="cart-header-title">
+        <span>🧁</span> Tu Carrito de Postres
+      </h3>
+      <button type="button" class="btn-close-drawer" data-action="close-cart" aria-label="Cerrar carrito">&times;</button>
+    </div>
+
+    <!-- Lista de Items en Carrito (RF-3.2) -->
+    <div class="cart-items-container" id="cartItemsList">
+      <!-- Items renderizados vía js/cart.js -->
+    </div>
+
+    <!-- Estado Carrito Vacío -->
+    <div class="cart-empty-box" id="cartEmptyState">
+      <div class="cart-empty-icon">🍰</div>
+      <h4 class="cart-empty-title">Tu carrito está vacío</h4>
+      <p class="cart-empty-desc">Aún no has seleccionado tus postres favoritos. ¡Elige uno de nuestros cheesecakes, roles o cookies!</p>
+      <button type="button" class="btn btn-primary" data-action="close-cart" onclick="document.getElementById('catalogo').scrollIntoView({behavior: 'smooth'})">
+        Ver Catálogo
+      </button>
+    </div>
+
+    <!-- Pie del Carrito con Subtotales y Checkout (RF-3.4 y RF-3.5) -->
+    <div class="cart-drawer-footer" id="cartFooter">
+      <div class="cart-summary-line">
+        <span>Subtotal:</span>
+        <strong id="cartSubtotal">RD$ 0.00</strong>
+      </div>
+      <div class="cart-summary-line">
+        <span>ITBIS estimado (18%):</span>
+        <strong id="cartTax">RD$ 0.00</strong>
+      </div>
+      <div class="cart-summary-line" id="cartShippingRow" style="display: none;">
+        <span>Envío a domicilio:</span>
+        <strong id="cartShippingCost">RD$ 0.00</strong>
+      </div>
+      <div class="cart-summary-line total-line">
+        <span>Total a Pagar:</span>
+        <span class="total-val" id="cartTotal">RD$ 0.00</span>
+      </div>
+
+      <button type="button" class="btn btn-primary btn-block" id="btnProceedCheckout" style="margin-top: 14px;">
+        <span>Proceder al Checkout</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"></polyline></svg>
+      </button>
+
+      <p class="cart-disclaimer-note">
+        🔒 Transacción segura en pesos dominicanos (RD$).
+      </p>
+    </div>
+
+  </aside>
+
+  <!-- ==========================================================================
+       MODAL DE CHECKOUT & VALIDACIÓN FORMULARIO (Módulo 4 y 5)
+       ========================================================================== -->
+  <div class="modal-backdrop" id="checkoutBackdrop"></div>
+  <div class="app-modal" id="checkoutModal" role="dialog" aria-modal="true" aria-labelledby="checkoutModalTitle">
+    
+    <div class="modal-header-bar">
+      <h3 class="modal-title" id="checkoutModalTitle">
+        <span>🛒</span> Finalizar Orden de Repostería
+      </h3>
+      <button type="button" class="btn-close-drawer" id="closeCheckoutModal" aria-label="Cerrar checkout">&times;</button>
+    </div>
+
+    <div class="modal-scrollable-body">
+      
+      <!-- Mini Resumen del Pedido -->
+      <div class="checkout-mini-summary">
+        <h4 style="font-size: 0.9rem; font-weight: 700; color: var(--accent-chocolate); margin-bottom: 8px;">
+          Resumen de tu pedido:
+        </h4>
+        <div class="mini-items-list" id="checkoutMiniItems"></div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.88rem; color: var(--text-muted);">
+          <span>Subtotal:</span>
+          <span id="checkoutSummarySubtotal">RD$ 0.00</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.88rem; color: var(--text-muted);">
+          <span>ITBIS (18%):</span>
+          <span id="checkoutSummaryTax">RD$ 0.00</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 0.88rem; color: #0284c7;" id="checkoutSummaryShippingRow">
+          <span>Envío a domicilio:</span>
+          <span id="checkoutSummaryShipping">RD$ 0.00</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; font-size: 1.15rem; font-weight: 800; color: var(--primary); margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--border-light);">
+          <span>Total:</span>
+          <span id="checkoutSummaryTotal">RD$ 0.00</span>
+        </div>
+      </div>
+
+      <form id="checkoutOrderForm" novalidate>
+
+        <!-- PASO 1: Datos Personales (RF-4.2) -->
+        <div class="checkout-section-block">
+          <div class="checkout-block-title">
+            <span class="step-num">1</span>
+            <span>Datos Personales del Cliente</span>
+          </div>
+
+          <div class="form-group">
+            <label for="client_name" class="form-label">Nombre y Apellido Completo *</label>
+            <input type="text" id="client_name" class="form-input" placeholder="Ej. Ana Victoria Kunhardt" required autocomplete="name">
+            <span class="field-error-msg"></span>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="client_phone" class="form-label">Teléfono de Contacto (Móvil) *</label>
+              <input type="tel" id="client_phone" class="form-input" placeholder="(809) 000-0000" maxlength="14" required autocomplete="tel">
+              <span class="field-error-msg"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="client_email" class="form-label">Correo Electrónico *</label>
+              <input type="email" id="client_email" class="form-input" placeholder="ejemplo@correo.com" required autocomplete="email">
+              <span class="field-error-msg"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- PASO 2: Logística y Entrega: Pick up vs Shipping (RF-5.1 a RF-5.3) -->
+        <div class="checkout-section-block">
+          <div class="checkout-block-title">
+            <span class="step-num">2</span>
+            <span>Logística y Método de Entrega</span>
+          </div>
+
+          <div class="delivery-options-grid">
+            <label class="delivery-card-radio">
+              <input type="radio" name="deliveryMethod" id="deliveryPickup" value="pickup" checked>
+              <span class="delivery-title">🏢 Retiro en Local (Pick up)</span>
+              <span class="delivery-sub">Recomendado • Sin costo adicional</span>
+            </label>
+
+            <label class="delivery-card-radio">
+              <input type="radio" name="deliveryMethod" id="deliveryShipping" value="shipping">
+              <span class="delivery-title">🛵 Envío a Domicilio (Shipping)</span>
+              <span class="delivery-sub">+ RD$ 175.00 • Fase 2</span>
+            </label>
+          </div>
+
+          <!-- Información de retiro en tienda (RF-5.2) -->
+          <div class="pickup-info-box" id="pickupLocationBox">
+            <div class="pickup-address-line">
+              📍 <strong>Lugar de recogida:</strong> Av. Abraham Lincoln #452, Piantini, Santo Domingo, D.N.
+            </div>
+            <div class="pickup-hours-line">
+              ⏱️ Horario disponible para retiro hoy: 9:00 AM a 8:00 PM
+            </div>
+            <div style="margin-top: 10px;">
+              <label for="pickup_time_slot" class="form-label" style="font-size: 0.78rem;">Selecciona tu hora aproximada de recogida:</label>
+              <select id="pickup_time_slot" class="form-input" style="padding: 8px;">
+                <option value="Lo antes posible (30-45 mins)">Lo antes posible (en 30 - 45 mins)</option>
+                <option value="Hoy entre 2:00 PM - 4:00 PM">Hoy entre 2:00 PM y 4:00 PM</option>
+                <option value="Hoy entre 4:00 PM - 6:00 PM">Hoy entre 4:00 PM y 6:00 PM</option>
+                <option value="Hoy entre 6:00 PM - 8:00 PM">Hoy entre 6:00 PM y 8:00 PM</option>
+                <option value="Mañana en la mañana (10:00 AM)">Mañana por la mañana (10:00 AM)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Campos de Envío Físico (RF-5.3 - Fase 2) -->
+          <div id="shippingFieldsContainer" style="display: none; margin-top: 14px;">
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="shipping_street" class="form-label">Calle y Número de Edificio/Casa *</label>
+                <input type="text" id="shipping_street" class="form-input shipping-input" placeholder="Calle Federico Geraldino #12, Torre Altagracia">
+                <span class="field-error-msg"></span>
+              </div>
+              <div class="form-group">
+                <label for="shipping_sector" class="form-label">Sector / Urbanización *</label>
+                <input type="text" id="shipping_sector" class="form-input shipping-input" placeholder="Piantini, Naco, Bella Vista...">
+                <span class="field-error-msg"></span>
+              </div>
+            </div>
+
+            <div class="form-grid-2">
+              <div class="form-group">
+                <label for="shipping_city" class="form-label">Ciudad / Municipio</label>
+                <input type="text" id="shipping_city" class="form-input" value="Santo Domingo, D.N." readonly>
+              </div>
+              <div class="form-group">
+                <label for="shipping_ref" class="form-label">Referencia de Entrega</label>
+                <input type="text" id="shipping_ref" class="form-input shipping-input" placeholder="Apto 4-B, frente a la farmacia">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- PASO 3: Datos de Pago por Tarjeta (RF-4.3) -->
+        <div class="checkout-section-block">
+          <div class="checkout-block-title">
+            <span class="step-num">3</span>
+            <span>Pago Seguro con Tarjeta de Crédito / Débito</span>
+          </div>
+
+          <div class="form-group">
+            <label for="card_name" class="form-label">Nombre del Titular (como aparece en la tarjeta) *</label>
+            <input type="text" id="card_name" class="form-input" placeholder="ANA V KUNHARDT" required autocomplete="cc-name">
+            <span class="field-error-msg"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="card_number" class="form-label">Número de Tarjeta *</label>
+            <div class="card-input-wrapper">
+              <input type="text" id="card_number" class="form-input" placeholder="4000 1234 5678 9010" maxlength="19" required autocomplete="cc-number">
+              <div class="card-brand-preview" id="cardBrandIcon">💳</div>
+            </div>
+            <span class="field-error-msg"></span>
+          </div>
+
+          <div class="form-grid-2">
+            <div class="form-group">
+              <label for="card_exp" class="form-label">Vencimiento (MM/AA) *</label>
+              <input type="text" id="card_exp" class="form-input" placeholder="MM/AA" maxlength="5" required autocomplete="cc-exp">
+              <span class="field-error-msg"></span>
+            </div>
+
+            <div class="form-group">
+              <label for="card_cvv" class="form-label">Código CVV *</label>
+              <input type="password" id="card_cvv" class="form-input" placeholder="•••" maxlength="4" required autocomplete="cc-csc">
+              <span class="field-error-msg"></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Botón de Confirmación -->
+        <button type="submit" class="btn btn-primary btn-block" id="btnSubmitOrder" style="padding: 14px; font-size: 1.05rem;">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+          Confirmar y Procesar Orden
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL DE RECIBO / CONFIRMACIÓN DE ORDEN (Stakeholder 4 & RF-4.1)
+       ========================================================================== -->
+  <div class="modal-backdrop" id="orderSuccessBackdrop"></div>
+  <div class="app-modal" id="orderSuccessModal" role="dialog" aria-modal="true">
+    
+    <div class="modal-header-bar">
+      <h3 class="modal-title">
+        <span>🎉</span> ¡Orden Recibida con Éxito!
+      </h3>
+      <button type="button" class="btn-close-drawer" onclick="closeOrderSuccessModal()" aria-label="Cerrar comprobante">&times;</button>
+    </div>
+
+    <div class="modal-scrollable-body">
+      <div class="receipt-box" id="printableReceiptArea">
+        
+        <div class="receipt-header">
+          <div class="receipt-success-icon">✓</div>
+          <h2 style="font-family: var(--font-heading); color: var(--accent-chocolate); font-size: 1.4rem;">Short N’ Sweet Bakery</h2>
+          <p style="font-size: 0.8rem; color: var(--text-muted);">Comprobante Oficial de Pedido Web</p>
+          <div class="receipt-num" id="receiptOrderNumber">#SNS-000000</div>
+          <div style="font-size: 0.78rem; color: var(--text-light); margin-top: 4px;" id="receiptDate"></div>
+        </div>
+
+        <div style="margin-bottom: 16px; font-size: 0.88rem;">
+          <div><strong>Cliente:</strong> <span id="receiptClientName"></span></div>
+          <div><strong>Teléfono:</strong> <span id="receiptClientPhone"></span></div>
+          <div style="margin-top: 6px;">
+            <span class="badge badge-brand" id="receiptDeliveryBadge">Pick up</span>
+          </div>
+          <div style="margin-top: 8px; background: #fffdfa; padding: 8px; border-radius: 6px; border: 1px solid var(--border-light);" id="receiptDeliveryInfo"></div>
+        </div>
+
+        <table class="receipt-table">
+          <thead>
+            <tr>
+              <th>Detalle del Postre</th>
+              <th class="text-right">Unitario</th>
+              <th class="text-right">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody id="receiptItemsList"></tbody>
+          <tfoot>
+            <tr>
+              <td colspan="2"><strong>Subtotal:</strong></td>
+              <td class="text-right" id="receiptSubtotal"></td>
+            </tr>
+            <tr>
+              <td colspan="2">ITBIS (18%):</td>
+              <td class="text-right" id="receiptTax"></td>
+            </tr>
+            <tr id="receiptShippingRow" style="display: none;">
+              <td colspan="2">Envío a Domicilio:</td>
+              <td class="text-right" id="receiptShipping"></td>
+            </tr>
+            <tr style="font-size: 1.1rem; color: var(--primary);">
+              <td colspan="2"><strong>TOTAL PAGADO:</strong></td>
+              <td class="text-right"><strong id="receiptTotal"></strong></td>
+            </tr>
+          </tfoot>
+        </table>
+
+        <div class="receipt-qr-area">
+          <div>
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--accent-chocolate);">Código de Retiro Rápido:</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">Muestra este código al llegar para atención en menos de 2 minutos.</div>
+            <div style="font-size: 0.75rem; color: var(--text-muted); margin-top: 4px;">Método: Tarjeta <span id="receiptCardLast4"></span></div>
+          </div>
+          <div class="qr-code-mock" title="Código QR simulado para lectura en mostrador"></div>
+        </div>
+
+      </div>
+
+      <div style="display: flex; gap: 10px; margin-top: 20px;">
+        <button type="button" class="btn btn-secondary btn-block btn-print" onclick="window.print()">
+          🖨️ Imprimir Comprobante
+        </button>
+        <button type="button" class="btn btn-primary btn-block" onclick="closeOrderSuccessModal()">
+          Entendido, gracias
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ==========================================================================
+       MODAL DE VISTA RÁPIDA DE PRODUCTO (RF-2.2)
+       ========================================================================== -->
+  <div class="modal-backdrop" id="productModalBackdrop"></div>
+  <div class="app-modal" id="productModal" role="dialog" aria-modal="true">
+    <div class="modal-header-bar">
+      <h3 class="modal-title">
+        <span>🍰</span> Ficha Técnica del Postre
+      </h3>
+      <button type="button" class="btn-close-drawer" id="closeProductModal" aria-label="Cerrar detalle">&times;</button>
+    </div>
+    <div class="modal-scrollable-body">
+      <div class="quickview-grid">
+        <div>
+          <img src="" alt="" id="modalProductImg" class="quickview-img">
+        </div>
+        <div class="quickview-info">
+          <div>
+            <span class="badge" id="modalProductStatus">Disponible</span>
+            <h3 id="modalProductTitle" style="font-family: var(--font-heading); font-size: 1.4rem; color: var(--accent-chocolate); margin: 8px 0 4px;"></h3>
+            <div id="modalProductRating" style="color: var(--secondary-hover); font-size: 0.85rem; font-weight: 700; margin-bottom: 10px;"></div>
+            <div id="modalProductPrice" style="font-size: 1.4rem; font-weight: 800; color: var(--primary); margin-bottom: 12px;"></div>
+            <p id="modalProductDesc" style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5; margin-bottom: 12px;"></p>
+            
+            <div class="nutrition-note">
+              <div>📏 <strong>Porciones/Tamaño:</strong> <span id="modalProductPortions"></span></div>
+              <div style="margin-top: 4px;">🌾 <strong>Ingredientes Clave:</strong> <span id="modalProductIngredients"></span></div>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 14px; margin-top: 16px;">
+            <div class="quantity-stepper" style="padding: 4px 8px;">
+              <button type="button" class="stepper-btn" id="modalQtyMinus">-</button>
+              <span class="stepper-value" id="modalQtyValue">1</span>
+              <button type="button" class="stepper-btn" id="modalQtyPlus">+</button>
+            </div>
+            <button type="button" class="btn btn-primary" id="modalAddCartBtn" style="flex: 1;">
+              Añadir al Carrito
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL DE CUENTA / HISTORIAL DE PEDIDOS (RF-1.6)
+       ========================================================================== -->
+  <div class="modal-backdrop" id="accountModalBackdrop"></div>
+  <div class="app-modal" id="accountModal" role="dialog" aria-modal="true">
+    <div class="modal-header-bar">
+      <h3 class="modal-title">
+        <span>👤</span> Mi Cuenta & Pedidos Realizados
+      </h3>
+      <button type="button" class="btn-close-drawer" id="closeAccountModal" aria-label="Cerrar modal de cuenta">&times;</button>
+    </div>
+    <div class="modal-scrollable-body">
+      <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">
+        Aquí puedes consultar el estado y comprobantes de tus compras recientes en Short N' Sweet Bakery.
+      </p>
+      <div id="accountOrdersHistory"></div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL PARA DEJAR RESEÑA (RF-6.5)
+       ========================================================================== -->
+  <div class="modal-backdrop" id="reviewModalBackdrop"></div>
+  <div class="app-modal" id="reviewModal" role="dialog" aria-modal="true">
+    <div class="modal-header-bar">
+      <h3 class="modal-title">
+        <span>⭐</span> Compartir mi Reseña
+      </h3>
+      <button type="button" class="btn-close-drawer" id="closeReviewModal" aria-label="Cerrar modal">&times;</button>
+    </div>
+    <div class="modal-scrollable-body">
+      <form id="addNewReviewForm">
+        <div class="form-group">
+          <label for="rev_name" class="form-label">Tu Nombre Completo *</label>
+          <input type="text" id="rev_name" class="form-input" placeholder="Ej. Gabriela Santana" required>
+        </div>
+        <div class="form-group">
+          <label for="rev_product" class="form-label">Postre que probaste *</label>
+          <select id="rev_product" class="form-input" required>
+            <option value="Classic New York Cheesecake">Classic New York Cheesecake</option>
+            <option value="Strawberry Swirl Cheesecake">Strawberry Swirl Cheesecake</option>
+            <option value="Classic Cinnamon Roll">Classic Cinnamon Roll Glaseado</option>
+            <option value="Lotus Biscoff Crunch Roll">Lotus Biscoff Crunch Roll</option>
+            <option value="Triple Chocolate Chunk Cookie">Triple Chocolate Chunk Cookie</option>
+            <option value="Red Velvet Cream Cheese Stuffed">Red Velvet Cream Cheese Cookie</option>
+            <option value="Flan Tradicional Casero">Flan Tradicional Casero</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="rev_rating" class="form-label">Calificación *</label>
+          <select id="rev_rating" class="form-input" required>
+            <option value="5">⭐⭐⭐⭐⭐ 5 Estrellas (¡Excepcional!)</option>
+            <option value="4">⭐⭐⭐⭐ 4 Estrellas (Muy bueno)</option>
+            <option value="3">⭐⭐⭐ 3 Estrellas (Bueno)</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="rev_comment" class="form-label">Tu Opinión *</label>
+          <textarea id="rev_comment" class="form-input" rows="3" placeholder="Cuéntanos sobre el sabor, textura y atención recibida..." required></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Publicar mi Opinión</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       PIE DE PÁGINA (FOOTER - Créditos UNAPEC)
+       ========================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      
+      <div class="footer-top-grid">
+        
+        <div>
+          <div class="footer-brand-name">Short N’ Sweet Bakery 🧁</div>
+          <p class="footer-brand-desc">
+            Repostería y pastelería fina artesanal en Santo Domingo. Especialistas en Cheesecakes neoyorquinos, Rolls de canela recién glaseados, Galletas rellenas y Flan casero.
+          </p>
+          <div style="font-size: 0.85rem; color: #fecdd3;">
+            📍 Av. Abraham Lincoln #452, Piantini, Santo Domingo, R.D.
+          </div>
+        </div>
+
+        <div>
+          <h4 class="footer-column-title">Nuestras Líneas</h4>
+          <ul class="footer-links-list">
+            <li><a href="#catalogo" class="nav-cat-btn" data-category="cheesecakes">Cheesecakes</a></li>
+            <li><a href="#catalogo" class="nav-cat-btn" data-category="rolls">Cinnamon Rolls</a></li>
+            <li><a href="#catalogo" class="nav-cat-btn" data-category="cookies">Cookies Artesanales</a></li>
+            <li><a href="#catalogo" class="nav-cat-btn" data-category="flan">Flan Casero</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-column-title">Atención al Cliente</h4>
+          <ul class="footer-links-list">
+            <li><a href="#ubicacion">Horarios y Pick up</a></li>
+            <li><a href="#faq">Preguntas Frecuentes</a></li>
+            <li><a href="#resenas">Reseñas de Clientes</a></li>
+            <li><a href="#contacto">Contacto & WhatsApp</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="footer-column-title">Proyecto Académico UNAPEC</h4>
+          <div class="academic-credits-box">
+            <strong>Universidad APEC</strong><br>
+            Facultad de Ciencias e Ingeniería<br>
+            Escuela de Informática • Ing. de Software<br>
+            Asignatura: <em>Diseño Web</em><br>
+            <strong>Grupo No. 01:</strong><br>
+            Anna Kunhardt A00121849<br>
+            Darwin Rodriguez A00123457<br>
+            Merdrys Dickson A00122032<br>
+            Ricardo Jiménez A00121883<br>
+            Samuel Perez A00121974
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom-bar">
+        <p>© 2026 Short N’ Sweet Bakery. Todos los derechos reservados. Desarrollado con HTML5 semántico, CSS3 y JavaScript ES6+.</p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       BOTÓN FLOTANTE DE CONTACTO RÁPIDO / WHATSAPP (RF-10.b)
+       ========================================================================== -->
+  <a 
+    href="https://wa.me/18095550192?text=Hola%20Short%20N'%20Sweet!%20Tengo%20una%20consulta%20sobre%20los%20postres" 
+    class="floating-contact-btn" 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    aria-label="Contactar por WhatsApp a la repostería"
+    title="Chatear por WhatsApp"
+  >
+    <svg width="30" height="30" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+    </svg>
+  </a>
+
+  <!-- Contenedor Dinámico para Notificaciones Toast -->
+  <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+  <!-- ==========================================================================
+       SCRIPTS JAVASCRIPT (Separación modular de capas)
+       ========================================================================== -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
