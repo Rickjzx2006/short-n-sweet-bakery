@@ -431,10 +431,45 @@ function initCheckoutFlow() {
   // Formateadores automáticos en vivo para Tarjeta y Teléfono
   setupInputMasks();
 
+  // Alternar entre pago con tarjeta y efectivo
+  document.querySelectorAll('input[name="paymentMethod"]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      syncPaymentFields();
+    });
+  });
+
+  // Vista previa del comprobante de transferencia
+  const voucherInput = document.getElementById('transfer_voucher');
+  if (voucherInput) {
+    voucherInput.addEventListener('change', () => {
+      const preview = document.getElementById('voucherPreview');
+      const file = voucherInput.files[0];
+      if (!preview) return;
+      if (file && file.type.startsWith('image/')) {
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = 'block';
+      } else {
+        preview.style.display = 'none';
+        preview.removeAttribute('src');
+      }
+    });
+  }
+
   // Validación y Procesamiento de la Orden
   if (checkoutForm) {
     checkoutForm.addEventListener('submit', handleCheckoutSubmit);
   }
+}
+
+// Muestra solo los campos del método de pago seleccionado
+function syncPaymentFields() {
+  const method = document.querySelector('input[name="paymentMethod"]:checked')?.value || 'card';
+  const cardFields = document.getElementById('cardFieldsContainer');
+  const cashInfo = document.getElementById('cashInfoBox');
+  const transferFields = document.getElementById('transferFieldsContainer');
+  if (cardFields) cardFields.style.display = method === 'card' ? '' : 'none';
+  if (cashInfo) cashInfo.style.display = method === 'cash' ? 'block' : 'none';
+  if (transferFields) transferFields.style.display = method === 'transfer' ? 'block' : 'none';
 }
 
 function updateCheckoutSummary() {
@@ -546,6 +581,7 @@ function handleCheckoutSubmit(e) {
   const cardExpInput = document.getElementById('card_exp');
   const cardCvvInput = document.getElementById('card_cvv');
   const deliveryType = document.querySelector('input[name="deliveryMethod"]:checked')?.value || 'pickup';
+  const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked')?.value || 'card';
 
   // RegEx de Validación Estricta
   const nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑüÜ\s]{3,60}$/;
@@ -601,6 +637,7 @@ function handleCheckoutSubmit(e) {
     }
   }
 
+  if (paymentMethod === 'card') {
   // Validación Titular Tarjeta
   if (!nameRegex.test(cardNameInput.value.trim())) {
     setFieldError(cardNameInput, 'Ingresa el nombre tal como figura en el plástico de la tarjeta.');
@@ -643,6 +680,33 @@ function handleCheckoutSubmit(e) {
   } else {
     clearFieldError(cardCvvInput);
   }
+  }
+
+  const transferRefInput = document.getElementById('transfer_ref');
+  const voucherInput = document.getElementById('transfer_voucher');
+
+  if (paymentMethod === 'transfer') {
+    if (!/^[a-zA-Z0-9-]{4,30}$/.test(transferRefInput.value.trim())) {
+      setFieldError(transferRefInput, 'Ingresa el número de referencia (4 a 30 letras, números o guiones).');
+      isValid = false;
+    } else {
+      clearFieldError(transferRefInput);
+    }
+
+    const voucherFile = voucherInput.files[0];
+    if (!voucherFile) {
+      setFieldError(voucherInput, 'Adjunta el comprobante de la transferencia.');
+      isValid = false;
+    } else if (!/^(image\/|application\/pdf)/.test(voucherFile.type)) {
+      setFieldError(voucherInput, 'El comprobante debe ser una imagen o un PDF.');
+      isValid = false;
+    } else if (voucherFile.size > 5 * 1024 * 1024) {
+      setFieldError(voucherInput, 'El archivo supera el máximo de 5 MB.');
+      isValid = false;
+    } else {
+      clearFieldError(voucherInput);
+    }
+  }
 
   if (!isValid) {
     window.showToast?.('Por favor corrige los campos señalados en rojo en el formulario.', 'warning');
@@ -678,10 +742,19 @@ function handleCheckoutSubmit(e) {
         city: document.getElementById('shipping_city').value.trim(),
         reference: document.getElementById('shipping_ref').value.trim()
       } : null,
-      payment: {
-        titular: cardNameInput.value.trim(),
-        cardLast4: rawCardNumber.slice(-4)
-      },
+      payment: paymentMethod === 'cash'
+        ? { method: 'cash' }
+        : paymentMethod === 'transfer'
+          ? {
+              method: 'transfer',
+              reference: transferRefInput.value.trim(),
+              voucherName: voucherInput.files[0].name
+            }
+          : {
+              method: 'card',
+              titular: cardNameInput.value.trim(),
+              cardLast4: rawCardNumber.slice(-4)
+            },
       items: [...window.cartInstance.items],
       calculations: window.cartInstance.getCalculations()
     };
@@ -691,6 +764,12 @@ function handleCheckoutSubmit(e) {
 
     // Resetear formulario y carrito
     e.target.reset();
+    const voucherPreview = document.getElementById('voucherPreview');
+    if (voucherPreview) {
+      voucherPreview.style.display = 'none';
+      voucherPreview.removeAttribute('src');
+    }
+    syncPaymentFields();
     submitBtn.disabled = false;
     submitBtn.innerHTML = originalText;
     window.closeCheckoutModal();
@@ -775,7 +854,18 @@ function showOrderConfirmationModal(order) {
   }
 
   document.getElementById('receiptTotal').textContent = window.cartInstance.formatCurrency(order.calculations.total);
-  document.getElementById('receiptCardLast4').textContent = `•••• •••• •••• ${order.payment.cardLast4}`;
+  const payMethodEl = document.getElementById('receiptPaymentMethod');
+  const payDetailEl = document.getElementById('receiptCardLast4');
+  if (order.payment.method === 'cash') {
+    payMethodEl.textContent = 'Efectivo (pago al recibir)';
+    payDetailEl.textContent = '';
+  } else if (order.payment.method === 'transfer') {
+    payMethodEl.textContent = 'Transferencia · Ref.';
+    payDetailEl.textContent = order.payment.reference;
+  } else {
+    payMethodEl.textContent = 'Tarjeta';
+    payDetailEl.textContent = `•••• •••• •••• ${order.payment.cardLast4}`;
+  }
 
   modal.classList.add('active');
   if (backdrop) backdrop.classList.add('active');
