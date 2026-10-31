@@ -1336,6 +1336,16 @@ button {
   margin-bottom: 16px;
 }
 
+.payment-options-grid {
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 560px) {
+  .payment-options-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
 .delivery-card-radio {
   border: 2px solid var(--border-light);
   border-radius: var(--radius-md);
